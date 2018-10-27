@@ -43,7 +43,7 @@ export default [
         },
         {
           test: /\.scss/,
-          use: ['style-loader', 'sass-loader']
+          use: ['style-loader', 'css-loader', 'sass-loader']
         },
         {
           test: /\.ttf|\.woff2|\.woff|\.eot|\.svg/,
