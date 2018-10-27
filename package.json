@@ -1,7 +1,7 @@
 {
   "name": "multiple-builds-with-webpack",
   "version": "1.0.0",
-  "description": "This project showcases how to use webpack to have more than one build for multiple environments.",
+  "description": "This repository serves as a demonstration and also a template for projects that require different builds for different environments using webpack.",
   "main": "index.js",
   "babel": {
     "presets": [

@@ -2,7 +2,7 @@
 
 # What this is
 
-This repository serves as a demonstration and also a template for projects that require different builds for multiple environments using webpack.
+This repository serves as a demonstration and also a template for projects that require different builds for different environments using webpack.
 
 It starts out with web, native, and mobile using [inferno-js](https://github.com/infernojs/inferno). But you can certainly modify it to use [react](https://github.com/facebook/react) or anything really. The repository is already setup for development and production.
 
