@@ -1,10 +1,12 @@
-import { render, Component } from "inferno";
+/** @format */
 
-const targetElement = document.getElementById("app");
+import { render, Component } from 'inferno';
 
-function App() {
+const targetElement = document.getElementById('app');
+
+function App () {
   this.render = () => {
-    return <h1>Hello, I'm the App</h1>;
+    return <h1>Hello, {'I\'m'} the App</h1>;
   };
 
   return this;

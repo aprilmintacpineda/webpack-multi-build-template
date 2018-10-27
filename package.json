@@ -17,7 +17,10 @@
     "reinstallNodeModules": "rm -rf node_modules package-lock.json && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf builds && babel-node node_modules/webpack-cli/bin/cli.js --config webpack.prod.js",
-    "start": "babel-node node_modules/.bin/webpack-dev-server"
+    "start": "babel-node node_modules/.bin/webpack-dev-server",
+    "eslint": "eslint --fix src/**/*.js",
+    "prettier": "prettier \"src/**/*.js\" --write",
+    "lint": "npm run prettier && npm run eslint"
   },
   "author": "April Mintac Pineda",
   "license": "MIT",
@@ -39,6 +42,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-inferno": "^7.11.0",
     "html-webpack-plugin": "^3.2.0",
+    "prettier": "^1.14.3",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"

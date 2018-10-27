@@ -1,1 +1,3 @@
-console.log("native/entry!");
+/** @format */
+
+console.log('native/entry!');

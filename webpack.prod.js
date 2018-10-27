@@ -1,22 +1,21 @@
-import webpack from "webpack";
-import path from "path";
-import HTMLWebpackPlugin from "html-webpack-plugin";
+import path from 'path';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
 
 export default [
   {
-    name: "WEB",
-    mode: "production",
+    name: 'WEB',
+    mode: 'production',
     bail: true,
-    entry: path.join(__dirname, "/src/web/entry.js"),
+    entry: path.join(__dirname, '/src/web/entry.js'),
     output: {
-      filename: "js/main.js",
-      chunkFilename: "js/[name].js",
-      path: path.resolve(__dirname, "builds/web")
+      filename: 'js/main.js',
+      chunkFilename: 'js/[name].js',
+      path: path.resolve(__dirname, 'builds/web')
     },
     plugins: [
       new HTMLWebpackPlugin({
-        template: path.join(__dirname, "/public/index.html"),
-        path: path.resolve(__dirname, "/builds/web/index.html"),
+        template: path.join(__dirname, '/public/index.html'),
+        path: path.resolve(__dirname, '/builds/web/index.html'),
         minify: {
           collapseWhitespace: true,
           removeComments: true,
@@ -33,14 +32,14 @@ export default [
           test: /\.js/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
+            loader: 'babel-loader'
           }
         }
       ]
     },
     optimization: {
       splitChunks: {
-        chunks: "all"
+        chunks: 'all'
       }
     }
   }
