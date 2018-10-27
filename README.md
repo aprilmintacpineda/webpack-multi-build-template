@@ -20,3 +20,13 @@ For code formatting the template is using [eslint](https://github.com/eslint/esl
 2. `npm i`
 3. `npm run start` -- A browser will open.
 4. `npm run build` -- to build for production. Your files would be at `builds/`.
+
+#### Serving built files
+
+You can serve built files after running `npm run build` by running one of the following.
+
+- `npm run serve:web`
+- `npm run serve:native`
+- `npm run serve:mobile`
+
+This feature is powered by [http-server](https://github.com/indexzero/http-server).
