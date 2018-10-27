@@ -1,3 +1,5 @@
+/** @format */
+
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 
@@ -33,6 +35,20 @@ export default [
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader'
+          }
+        },
+        {
+          test: /\.css/,
+          use: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.scss/,
+          use: ['style-loader', 'sass-loader']
+        },
+        {
+          test: /\.ttf|\.woff2|\.woff|\.eot|\.svg/,
+          use: {
+            loader: 'file-loader'
           }
         }
       ]

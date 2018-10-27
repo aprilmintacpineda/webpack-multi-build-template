@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "color-no-invalid-hex": true,
+    "block-no-empty": true,
+    "shorthand-property-no-redundant-values": true,
+    "indentation": 2
+  }
+}

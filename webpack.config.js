@@ -1,3 +1,5 @@
+/** @format */
+
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 
@@ -34,6 +36,20 @@ export default [
           use: {
             loader: 'babel-loader'
           }
+        },
+        {
+          test: /\.css/,
+          use: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.scss/,
+          use: ['style-loader', 'css-loader', 'sass-loader']
+        },
+        {
+          test: /\.ttf|\.woff2|\.woff|\.eot|\.svg/,
+          use: {
+            loader: 'file-loader'
+          }
         }
       ]
     },
@@ -42,6 +58,7 @@ export default [
         chunks: 'all'
       }
     },
+    devtool: 'source-map',
     devServer: {
       host: '0.0.0.0',
       port: 3000,

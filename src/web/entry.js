@@ -1,12 +1,16 @@
 /** @format */
 
+import './styles.scss';
+import '@fortawesome/fontawesome-free/css/all.css';
 import { render, Component } from 'inferno';
+
+import Topbar from '../shared/navigations/Topbar';
 
 const targetElement = document.getElementById('app');
 
 function App () {
   this.render = () => {
-    return <h1>Hello, {'I\'m'} the App</h1>;
+    return <Topbar />;
   };
 
   return this;

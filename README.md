@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # What this is
 
 This repository serves as a demonstration and also a template for projects that require different builds for multiple environments using webpack.
@@ -7,6 +9,10 @@ It starts out with web, native, and mobile using [inferno-js](https://github.com
 # Code formatting
 
 For code formatting the template is using [eslint](https://github.com/eslint/eslint) and [prettier](https://github.com/prettier/prettier).
+
+# Styling
+
+Only `scss` is used for styling because as of the this writing, [`prettier` does not support `sass`](https://github.com/prettier/prettier/issues/4948).
 
 #### NPM scripts
 
@@ -18,7 +24,7 @@ For code formatting the template is using [eslint](https://github.com/eslint/esl
 
 1. Clone the repository.
 2. `npm i`
-3. `npm run start` -- A browser will open.
+3. `npm run start` -- A browser will open and you can start development.
 4. `npm run build` -- to build for production. Your files would be at `builds/`.
 
 #### Serving built files
