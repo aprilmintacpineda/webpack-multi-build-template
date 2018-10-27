@@ -10,6 +10,12 @@ It starts out with web, native, and mobile using [inferno-js](https://github.com
 
 For code formatting the template is using [eslint](https://github.com/eslint/eslint) and [prettier](https://github.com/prettier/prettier).
 
+#### NPM scripts
+
+- To run eslint `npm run eslint`.
+- To run prettier `npm run prettier`.
+- To run both in the proper order `npm run lint`.
+
 # Styling
 
 Only `scss` is used for styling because as of the this writing, [`prettier` does not support `sass`](https://github.com/prettier/prettier/issues/4948).
@@ -17,12 +23,6 @@ Only `scss` is used for styling because as of the this writing, [`prettier` does
 # Code splitting
 
 You can use [webpack's dynamic import](https://webpack.js.org/guides/code-splitting/#dynamic-imports) _BUT_ it does not work out of the box, you need a bridge like [inferno-async-component](https://github.com/aprilmintacpineda/inferno-async-component) to handle the component.
-
-#### NPM scripts
-
-- To run eslint `npm run eslint`.
-- To run prettier `npm run prettier`.
-- To run both in the proper order `npm run lint`.
 
 # Getting started
 
