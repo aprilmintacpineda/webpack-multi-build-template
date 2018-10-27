@@ -3,6 +3,8 @@
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 
+const rootDir = path.resolve(__dirname, 'builds/web');
+
 export default [
   {
     name: 'WEB',
@@ -12,12 +14,13 @@ export default [
     output: {
       filename: 'js/main.js',
       chunkFilename: 'js/[name].js',
-      path: path.resolve(__dirname, 'builds/web')
+      path: rootDir
     },
     plugins: [
       new HTMLWebpackPlugin({
         template: path.join(__dirname, '/public/index.html'),
-        path: path.resolve(__dirname, '/builds/web/index.html'),
+        path: rootDir,
+        filename: 'index.html',
         minify: {
           collapseWhitespace: true,
           removeComments: true,

@@ -10,7 +10,8 @@
     ],
     "plugins": [
       "babel-plugin-inferno",
-      "@babel/plugin-syntax-jsx"
+      "@babel/plugin-syntax-jsx",
+      "@babel/plugin-syntax-dynamic-import"
     ]
   },
   "scripts": {
@@ -19,7 +20,7 @@
     "build": "rm -rf builds && babel-node node_modules/webpack-cli/bin/cli.js --config webpack.prod.js",
     "serve:web": "http-server builds/web",
     "start": "babel-node node_modules/.bin/webpack-dev-server",
-    "eslint": "eslint --fix src/**/*.js",
+    "eslint": "eslint \"src/**/*.js\" --fix",
     "prettier": "prettier \"src/**/*.{js,scss}\" --write",
     "lint": "npm run prettier && npm run eslint"
   },
@@ -28,12 +29,14 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.4.2",
     "inferno": "^6.0.3",
+    "inferno-async-component": "^1.0.1",
     "inferno-router": "^6.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/node": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-jsx": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
@@ -47,7 +50,11 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
+    "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.2.0",
     "prettier": "^1.14.3",
     "prettier-stylelint": "^0.4.2",
     "sass-loader": "^7.1.0",

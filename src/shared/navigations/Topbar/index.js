@@ -3,7 +3,7 @@
 import './styles.scss';
 import { Component } from 'inferno';
 
-function Topbar() {
+function Topbar () {
   this.render = () => {
     return (
       <div className="topbar">

@@ -2,6 +2,11 @@
 
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import OptimizeCssAssetsWebpackPlugin from 'optimize-css-assets-webpack-plugin';
+import postcssPresetEnv from 'postcss-preset-env';
+
+const rootDir = path.resolve(__dirname, 'builds/web');
 
 export default [
   {
@@ -12,12 +17,18 @@ export default [
     output: {
       filename: 'js/main.js',
       chunkFilename: 'js/[name].js',
-      path: path.resolve(__dirname, 'builds/web')
+      path: rootDir
     },
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].css',
+        chunkFilename: 'css/[name].css'
+      }),
+      new OptimizeCssAssetsWebpackPlugin(),
       new HTMLWebpackPlugin({
         template: path.join(__dirname, '/public/index.html'),
-        path: path.resolve(__dirname, '/builds/web/index.html'),
+        path: rootDir,
+        filename: 'index.html',
         minify: {
           collapseWhitespace: true,
           removeComments: true,
@@ -39,16 +50,30 @@ export default [
         },
         {
           test: /\.css/,
-          use: ['style-loader', 'css-loader']
+          use: [MiniCssExtractPlugin.loader, 'css-loader']
         },
         {
           test: /\.scss/,
-          use: ['style-loader', 'css-loader', 'sass-loader']
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [postcssPresetEnv()]
+              }
+            }
+          ]
         },
         {
           test: /\.ttf|\.woff2|\.woff|\.eot|\.svg/,
           use: {
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+              name: 'assets/[name].[ext]',
+              publicPath: '/'
+            }
           }
         }
       ]
