@@ -1,10 +1,11 @@
 /** @format */
 
 import path from 'path';
+import postcssPresetEnv from 'postcss-preset-env';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCssAssetsWebpackPlugin from 'optimize-css-assets-webpack-plugin';
-import postcssPresetEnv from 'postcss-preset-env';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const rootDir = path.resolve(__dirname, 'builds/web');
 
@@ -37,7 +38,8 @@ export default [
           removeStyleLinkTypeAttributes: true,
           useShortDoctype: true
         }
-      })
+      }),
+      new CopyWebpackPlugin([{ from: path.join(__dirname, 'public'), ignore: ['index.html'] }])
     ],
     module: {
       rules: [
@@ -67,11 +69,31 @@ export default [
           ]
         },
         {
-          test: /\.ttf|\.woff2|\.woff|\.eot|\.svg/,
+          test: /\.ttf|\.woff2|\.woff|\.eot/,
           use: {
             loader: 'file-loader',
             options: {
-              name: 'assets/[name].[ext]',
+              name: 'fonts/[name].[ext]',
+              publicPath: '/'
+            }
+          }
+        },
+        {
+          test: /\.gif|\.png|\.jpg|\.jpeg/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]',
+              publicPath: '/'
+            }
+          }
+        },
+        {
+          test: /\.svg/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: 'svgs/[name].[ext]',
               publicPath: '/'
             }
           }
