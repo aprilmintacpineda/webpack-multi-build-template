@@ -34,7 +34,11 @@ Webpack is configured to save _all css files_ you used in your js files in the `
 
 1. Clone the repository.
 2. `npm i`
-3. `npm run start` -- A browser will open and you can start development.
+3. development
+
+- `npm run start:web` -- to start development in web.
+- `npm run start:native` -- to start development in native.
+
 4. `npm run build` -- to build for production. Your files would be at `builds/`.
 
 #### Serving built files
@@ -43,6 +47,5 @@ You can serve built files after running `npm run build` by running one of the fo
 
 - `npm run serve:web`
 - `npm run serve:native`
-- `npm run serve:mobile`
 
 This feature is powered by [http-server](https://github.com/indexzero/http-server).
