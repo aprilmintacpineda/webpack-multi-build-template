@@ -17,11 +17,11 @@
   "scripts": {
     "reinstallNodeModules": "rm -rf node_modules package-lock.json && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf builds && babel-node node_modules/webpack-cli/bin/cli.js --config webpackConfigs/prod.js",
+    "build": "rm -rf builds && babel-node node_modules/webpack-cli/bin/cli.js --config webpack.prod.js",
     "serve:web": "http-server builds/web",
     "serve:native": "http-server builds/native",
-    "start:web": "babel-node node_modules/.bin/webpack-dev-server --config webpackConfigs/web.dev.js",
-    "start:native": "babel-node node_modules/.bin/webpack-dev-server --config webpackConfigs/native.dev.js",
+    "start:web": "babel-node node_modules/.bin/webpack-dev-server --config webpack.web.js",
+    "start:native": "babel-node node_modules/.bin/webpack-dev-server --config webpack.native.js",
     "eslint": "eslint \"src/**/*.js\" --fix",
     "prettier": "prettier \"src/**/*.{js,scss}\" --write",
     "lint": "npm run prettier && npm run eslint"

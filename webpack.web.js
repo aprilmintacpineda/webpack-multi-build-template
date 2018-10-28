@@ -4,23 +4,23 @@ import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const nativeOutputDir = path.resolve(__dirname, '../builds/native');
-const nativeEntryFile = path.join(__dirname, '../src/native/entry.js');
+const webOutputDir = path.resolve(__dirname, 'builds/web');
+const webEntryFile = path.join(__dirname, 'src/web/entry.js');
 
 export default {
-  name: 'NATIVE',
+  name: 'WEB',
   mode: 'development',
   bail: true,
-  entry: nativeEntryFile,
+  entry: webEntryFile,
   output: {
     filename: 'js/main.js',
     chunkFilename: 'js/[name].js',
-    path: nativeOutputDir
+    path: webOutputDir
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, '../public/index.html'),
-      path: nativeOutputDir,
+      template: path.join(__dirname, 'public/index.html'),
+      path: webOutputDir,
       filename: 'index.html',
       minify: {
         collapseWhitespace: true,
@@ -31,7 +31,7 @@ export default {
         useShortDoctype: true
       }
     }),
-    new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }])
+    new CopyWebpackPlugin([{ from: path.join(__dirname, 'public'), ignore: ['index.html'] }])
   ],
   module: {
     rules: [
@@ -90,7 +90,7 @@ export default {
   devtool: 'source-map',
   devServer: {
     host: '0.0.0.0',
-    port: 9100,
+    port: 9000,
     open: true
   }
 };
