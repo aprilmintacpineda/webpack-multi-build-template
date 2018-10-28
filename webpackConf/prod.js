@@ -7,11 +7,11 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCssAssetsWebpackPlugin from 'optimize-css-assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const webOutputDir = path.resolve(__dirname, 'builds/web');
-const webEntryFile = path.join(__dirname, '/src/web/entry.js');
+const webOutputDir = path.resolve(__dirname, '../builds/web');
+const webEntryFile = path.join(__dirname, '../src/web/entry.js');
 
-const nativeOutputDir = path.resolve(__dirname, 'builds/native');
-const nativeEntryFile = path.join(__dirname, '/src/native/entry.js');
+const nativeOutputDir = path.resolve(__dirname, '../builds/native');
+const nativeEntryFile = path.join(__dirname, '../src/native/entry.js');
 
 export default [
   {
@@ -31,7 +31,7 @@ export default [
       }),
       new OptimizeCssAssetsWebpackPlugin(),
       new HTMLWebpackPlugin({
-        template: path.join(__dirname, '/public/index.html'),
+        template: path.join(__dirname, '../public/index.html'),
         path: webOutputDir,
         filename: 'index.html',
         minify: {
@@ -43,7 +43,7 @@ export default [
           useShortDoctype: true
         }
       }),
-      new CopyWebpackPlugin([{ from: path.join(__dirname, 'public'), ignore: ['index.html'] }])
+      new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }])
     ],
     module: {
       rules: [
@@ -127,7 +127,7 @@ export default [
       }),
       new OptimizeCssAssetsWebpackPlugin(),
       new HTMLWebpackPlugin({
-        template: path.join(__dirname, '/public/index.html'),
+        template: path.join(__dirname, '../public/index.html'),
         path: nativeOutputDir,
         filename: 'index.html',
         minify: {
@@ -139,7 +139,7 @@ export default [
           useShortDoctype: true
         }
       }),
-      new CopyWebpackPlugin([{ from: path.join(__dirname, 'public'), ignore: ['index.html'] }])
+      new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }])
     ],
     module: {
       rules: [
