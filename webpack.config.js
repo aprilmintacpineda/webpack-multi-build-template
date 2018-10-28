@@ -4,23 +4,24 @@ import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const rootDir = path.resolve(__dirname, 'builds/web');
+const webOutputDir = path.resolve(__dirname, 'builds/web');
+const webEntryFile = path.join(__dirname, '/src/web/entry.js');
 
 export default [
   {
     name: 'WEB',
     mode: 'development',
     bail: true,
-    entry: path.join(__dirname, '/src/web/entry.js'),
+    entry: webEntryFile,
     output: {
       filename: 'js/main.js',
       chunkFilename: 'js/[name].js',
-      path: rootDir
+      path: webOutputDir
     },
     plugins: [
       new HTMLWebpackPlugin({
         template: path.join(__dirname, '/public/index.html'),
-        path: rootDir,
+        path: webOutputDir,
         filename: 'index.html',
         minify: {
           collapseWhitespace: true,

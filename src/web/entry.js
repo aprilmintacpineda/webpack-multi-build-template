@@ -1,9 +1,15 @@
 /** @format */
 
-import './styles.scss';
+import '../shared/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
+
 import { render, Component } from 'inferno';
 import loadAsyncComponent from 'inferno-async-component';
+import { HashRouter, Switch, Route } from 'inferno-router';
+
+// routes
+import Home from './routes/Home';
+import About from './routes/About';
 
 const Topbar = loadAsyncComponent(
   import(/* webpackChunkName: 'Topbar' */ '../shared/navigations/Topbar')
@@ -11,7 +17,17 @@ const Topbar = loadAsyncComponent(
 
 function App () {
   this.render = () => {
-    return <Topbar />;
+    return (
+      <>
+        <Topbar />
+        <HashRouter>
+          <Switch>
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/about" exact={true} component={About} />
+          </Switch>
+        </HashRouter>
+      </>
+    );
   };
 
   return this;
