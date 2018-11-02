@@ -6,6 +6,26 @@ This repository serves as a demonstration and also a template for projects that 
 
 It starts out with web, native, and mobile using [inferno-js](https://github.com/infernojs/inferno). But you can certainly modify it to use [react](https://github.com/facebook/react) or anything really. The repository is already setup for development and production.
 
+# Getting started
+
+1. Clone the repository.
+2. `npm i`
+3. `npm run start` -- to start development. This will open a browser.
+4. `npm run build` -- to build for production. Your files would be at `builds/`.
+
+# .env file
+
+If you checkout the .env file, you would see `BUILD_TARGET` which is currently set to `web`. This is being use to determine the directory of where the source is and where the build would be. You should name this according to the folder name of your source inside the `src` directory. In this case, there's a `web` directory there where the source for the web environment is. You would also see the `entry.js` there, this is important as this is what the config would look at first to build your app.
+
+You can also specify `PORT` and `HOST`. Example:
+
+```
+HOST=dev.domain.loc
+PORT=3000
+```
+
+This is where your app would be accessible during development
+
 # Code formatting
 
 For code formatting the template is using [eslint](https://github.com/eslint/eslint) and [prettier](https://github.com/prettier/prettier).
@@ -29,17 +49,6 @@ You can use [webpack's dynamic import](https://webpack.js.org/guides/code-splitt
 Use the `public` folder on the root directory to store your public files. You can create folders there like `fonts/`, `css/`, `images/` if you have to.
 
 Webpack is configured to save _all css files_ you used in your js files in the `css/` folder of your build, so to avoid having two folders with only css files in them, you can also create `css/` folder in the `public` directory. Those files would be copied in the `css/` directory of the build together with the other css files you may be using, like in [font-awesome](https://www.npmjs.com/package/font-awesome). For the fonts, save them in the `public/fonts/` directory. For `images` save them in the `public/images` directory. For js save them in the `public/js` directory. For svg files, save them in the `public/svgs` directory.
-
-# Getting started
-
-1. Clone the repository.
-2. `npm i`
-3. development
-
-- `npm run start:web` -- to start development in web.
-- `npm run start:native` -- to start development in native.
-
-4. `npm run build` -- to build for production. Your files would be at `builds/`.
 
 #### Serving built files
 
