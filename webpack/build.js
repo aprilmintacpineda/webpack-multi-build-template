@@ -167,6 +167,11 @@ export default {
       chunks: 'all'
     }
   },
+  resolve: {
+    alias: {
+      _shared: path.join(__dirname, '../src/shared')
+    }
+  },
   node: {
     dgram: 'empty',
     fs: 'empty',

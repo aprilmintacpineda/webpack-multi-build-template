@@ -97,6 +97,11 @@ export default {
       chunks: 'all'
     }
   },
+  resolve: {
+    alias: {
+      _shared: path.join(__dirname, '../src/shared')
+    }
+  },
   devtool: 'source-map',
   devServer: {
     host: HOST,

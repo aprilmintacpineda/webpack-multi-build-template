@@ -1,6 +1,6 @@
 /** @format */
 
-import '../shared/styles/index.scss';
+import '_shared/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { render, Component } from 'inferno';
@@ -12,7 +12,7 @@ import Home from './routes/Home';
 import About from './routes/About';
 
 const Topbar = loadAsyncComponent(
-  import(/* webpackChunkName: 'Topbar' */ '../shared/navigations/Topbar')
+  import(/* webpackChunkName: 'Topbar' */ '_shared/navigations/Topbar')
 );
 
 function App () {
