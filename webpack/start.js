@@ -3,24 +3,31 @@
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { config } from 'dotenv';
 
-const webOutputDir = path.resolve(__dirname, 'builds/web');
-const webEntryFile = path.join(__dirname, 'src/web/entry.js');
+config();
+
+const BUILD_TARGET = process.env.BUILD_TARGET.trim();
+const HOST = process.env.host ? process.env.host.trim() : '0.0.0.0';
+const PORT = process.env.port ? process.env.port.trim() : 9000;
+
+const outputDir = path.join(__dirname, '../builds/' + BUILD_TARGET);
+const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
 
 export default {
-  name: 'WEB',
+  name: BUILD_TARGET,
   mode: 'development',
   bail: true,
-  entry: webEntryFile,
+  entry: entryFile,
   output: {
-    filename: 'js/main.js',
+    filename: 'js/[name].js',
     chunkFilename: 'js/[name].js',
-    path: webOutputDir
+    path: outputDir
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, 'public/index.html'),
-      path: webOutputDir,
+      template: path.join(__dirname, '../public/index.html'),
+      path: outputDir,
       filename: 'index.html',
       minify: {
         collapseWhitespace: true,
@@ -31,7 +38,7 @@ export default {
         useShortDoctype: true
       }
     }),
-    new CopyWebpackPlugin([{ from: path.join(__dirname, 'public'), ignore: ['index.html'] }])
+    new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }])
   ],
   module: {
     rules: [
@@ -83,14 +90,17 @@ export default {
     ]
   },
   optimization: {
+    runtimeChunk: {
+      name: 'runtime'
+    },
     splitChunks: {
       chunks: 'all'
     }
   },
   devtool: 'source-map',
   devServer: {
-    host: '0.0.0.0',
-    port: 9000,
+    host: HOST,
+    port: PORT,
     open: true
   }
 };

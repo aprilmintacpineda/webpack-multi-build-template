@@ -14,7 +14,6 @@ import chalk from 'chalk';
 config();
 
 const BUILD_TARGET = process.env.BUILD_TARGET.trim();
-
 const outputDir = path.join(__dirname, '../builds/' + BUILD_TARGET);
 const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
 
