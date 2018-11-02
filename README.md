@@ -25,6 +25,8 @@ All values defined in `env` global object are **STRINGS**.
 
 ## WEBSITE_NAME
 
+Is being used for the title in your `index.html`.
+
 ## BUILD_TARGET
 
 This is being use to determine the directory of where the source is and where the build would be. You should name this according to the folder name of your source inside the `src` directory. In this case, there's a `web` directory there where the source for the web build is. You would also see the `entry.js` there, this is important as this is what the config would look at first to build your app.
