@@ -49,7 +49,3 @@ You can serve built files after running `npm run build` by running one of the fo
 - `npm run serve:native`
 
 This feature is powered by [http-server](https://github.com/indexzero/http-server).
-
-# Notes
-
-`sass-loader` is at version `6.0.7` because of [this issue](https://github.com/webpack-contrib/sass-loader/issues/556).

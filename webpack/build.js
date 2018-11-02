@@ -73,7 +73,12 @@ export default {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [path.join(__dirname, '../src/shared/styles')]
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {

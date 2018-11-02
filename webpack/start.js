@@ -55,7 +55,16 @@ export default {
       },
       {
         test: /\.scss/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [path.join(__dirname, '../src/shared/styles')]
+            }
+          }
+        ]
       },
       {
         test: /\.ttf|\.woff2|\.woff|\.eot/,

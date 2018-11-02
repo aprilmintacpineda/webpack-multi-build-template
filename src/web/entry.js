@@ -2,6 +2,7 @@
 
 import '_shared/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
+import './test.scss';
 
 import { render, Component } from 'inferno';
 import loadAsyncComponent from 'inferno-async-component';
