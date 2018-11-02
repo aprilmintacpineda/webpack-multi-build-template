@@ -18,6 +18,8 @@ const Topbar = loadAsyncComponent(
 
 function App () {
   this.render = () => {
+    console.log(env); // eslint-disable-line
+
     return (
       <>
         <Topbar />

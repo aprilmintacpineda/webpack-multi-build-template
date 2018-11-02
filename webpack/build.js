@@ -1,5 +1,6 @@
 /** @format */
 
+import webpack from 'webpack';
 import path from 'path';
 import postcssPresetEnv from 'postcss-preset-env';
 import TerserWebpackPlugin from 'terser-webpack-plugin';
@@ -21,6 +22,10 @@ console.log(chalk.yellow('Using'), chalk.magenta(outputDir), chalk.yellow('as ou
 console.log(chalk.yellow('Using'), chalk.magenta(entryFile), chalk.yellow('as entry file.')); // eslint-disable-line
 console.log(); // eslint-disable-line
 
+process.env.NODE_ENV = 'production';
+
+const envs = ['PUBLIC_PATH', 'NODE_ENV'];
+
 export default {
   name: BUILD_TARGET,
   mode: 'production',
@@ -32,14 +37,20 @@ export default {
     path: outputDir
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[name].css'
+    new webpack.DefinePlugin({
+      env: Object.keys(process.env).reduce((compiled, key) => {
+        if (key.indexOf('APP_ENV_') !== -1 || envs.includes(key)) {
+          compiled[key] = JSON.stringify(process.env[key]);
+        }
+
+        return compiled;
+      }, {})
     }),
     new HTMLWebpackPlugin({
       template: path.join(__dirname, '../public/index.html'),
       path: outputDir,
       filename: 'index.html',
+      title: process.env.WEBSITE_NAME,
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -48,6 +59,10 @@ export default {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
       }
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[name].css'
     }),
     new InlineChunksHTMLWebpackPlugin({
       deleteFile: true,

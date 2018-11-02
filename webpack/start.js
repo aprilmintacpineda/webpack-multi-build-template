@@ -1,5 +1,6 @@
 /** @format */
 
+import webpack from 'webpack';
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -14,6 +15,10 @@ const PORT = process.env.port ? process.env.port.trim() : 9000;
 const outputDir = path.join(__dirname, '../builds/' + BUILD_TARGET);
 const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
 
+process.env.NODE_ENV = 'development';
+
+const envs = ['PUBLIC_PATH', 'NODE_ENV'];
+
 export default {
   name: BUILD_TARGET,
   mode: 'development',
@@ -25,10 +30,20 @@ export default {
     path: outputDir
   },
   plugins: [
+    new webpack.DefinePlugin({
+      env: Object.keys(process.env).reduce((compiled, key) => {
+        if (key.indexOf('APP_ENV_') !== -1 || envs.includes(key)) {
+          compiled[key] = JSON.stringify(process.env[key]);
+        }
+
+        return compiled;
+      }, {})
+    }),
     new HTMLWebpackPlugin({
       template: path.join(__dirname, '../public/index.html'),
       path: outputDir,
       filename: 'index.html',
+      title: process.env.WEBSITE_NAME,
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -111,7 +126,7 @@ export default {
       _shared: path.join(__dirname, '../src/shared')
     }
   },
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   devServer: {
     host: HOST,
     port: PORT,

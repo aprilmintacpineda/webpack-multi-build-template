@@ -13,18 +13,30 @@ It starts out with web, native, and mobile using [inferno-js](https://github.com
 3. `npm run start` -- to start development. This will open a browser.
 4. `npm run build` -- to build for production. Your files would be at `builds/`.
 
-# .env file
+# Dot Env
 
-If you checkout the .env file, you would see `BUILD_TARGET` which is currently set to `web`. This is being use to determine the directory of where the source is and where the build would be. You should name this according to the folder name of your source inside the `src` directory. In this case, there's a `web` directory there where the source for the web environment is. You would also see the `entry.js` there, this is important as this is what the config would look at first to build your app.
+## Environment variables
+
+Environment variables defined in `.env` file would be available as the `env` global object. You should prefix them with `APP_ENV_`, e.g., `APP_ENV_TEST_VAR="some value"`, which would be available via `env.APP_ENV_TEST_VAR`. `PUBLIC_PATH` and `NODE_ENV` are available by default.
+
+#### NOTE
+
+All values defined in `env` global object are **STRINGS**.
+
+## WEBSITE_NAME
+
+## BUILD_TARGET
+
+This is being use to determine the directory of where the source is and where the build would be. You should name this according to the folder name of your source inside the `src` directory. In this case, there's a `web` directory there where the source for the web build is. You would also see the `entry.js` there, this is important as this is what the config would look at first to build your app.
 
 You can also specify `PORT` and `HOST`. Example:
 
 ```
-HOST=dev.domain.loc
-PORT=3000
+HOST="dev.domain.loc"
+PORT="3000"
 ```
 
-This is where your app would be accessible during development
+This is where your app would be accessible during development.
 
 # Code formatting
 
