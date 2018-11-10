@@ -29,7 +29,9 @@ Is being used for the title in your `index.html`.
 
 ## BUILD_TARGET
 
-This is being use to determine the directory of where the source is and where the build would be. You should name this according to the folder name of your source inside the `src` directory. In this case, there's a `web` directory there where the source for the web build is. You would also see the `entry.js` there, this is important as this is what the config would look at first to build your app.
+This is only used in `npm run start` command.
+
+This is being use to determine the directory of where the sources are and where the build would be. You should name this according to the folder name of your source inside the `src` directory. In this case, there's a `web` directory there where the source for the web build is. You would also see the `entry.js` there, this is important as this is what the config would look at first to build your app.
 
 You can also specify `PORT` and `HOST`. Example:
 
@@ -39,6 +41,12 @@ PORT="3000"
 ```
 
 This is where your app would be accessible during development.
+
+## BUILD_TARGETS
+
+This is only used in `npm run build` command to build all environments in parallel.
+
+This should be a comma separated string of all the folder names inside the `src` directory where there's an `entry.js` file. E.g.: `BUILD_TARGETS="aDirectory,anotherDirectory,oneMoreDirectory"`. There should be no trailing spaces and slashes.
 
 # Code formatting
 
