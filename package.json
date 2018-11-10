@@ -17,7 +17,7 @@
   "scripts": {
     "reinstallNodeModules": "rm -rf node_modules package-lock.json && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf builds && babel-node node_modules/webpack-cli/bin/cli.js --config webpack/build && npm run filesizes",
+    "build": "rm -rf builds && babel-node node_modules/parallel-webpack/bin/run.js --config webpack/build && npm run filesizes",
     "start": "babel-node node_modules/.bin/webpack-dev-server --config webpack/start.js",
     "serve:web": "http-server builds/web",
     "serve": "http-server builds",
@@ -60,6 +60,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.9.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "parallel-webpack": "^2.3.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.3.0",
     "prettier": "^1.14.3",
