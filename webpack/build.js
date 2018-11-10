@@ -75,9 +75,23 @@ export default {
       {
         test: /\.js/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          'babel-loader',
+          {
+            loader: 'webpack-loader-clean-pragma',
+            options: {
+              pragmas: [
+                {
+                  start: '/** @delete */',
+                  end: '/** @enddelete */'
+                }
+              ],
+              consoles: {
+                warns: true
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.css/,
