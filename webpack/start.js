@@ -1,12 +1,20 @@
 /** @format */
 
-import webpack from 'webpack';
-import path from 'path';
-import HTMLWebpackPlugin from 'html-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import { config } from 'dotenv';
+const webpack = require('webpack');
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const InlineChunksHTMLWebpackPlugin = require('inline-chunks-html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-config();
+require('dotenv').config();
+
+function camelCase (str) {
+  return str.split('_').reduce(function (compiled, word, index) {
+	return compiled + (index === 0? word.toLowerCase() : word.substr(0, 1).toUpperCase() + word.substr(1).toLowerCase());
+  }, '');
+}
 
 const BUILD_TARGET = process.env.BUILD_TARGET.trim();
 const HOST = process.env.host ? process.env.host.trim() : '0.0.0.0';
@@ -17,23 +25,25 @@ const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
 
 process.env.NODE_ENV = 'development';
 
-const envs = ['PUBLIC_PATH', 'NODE_ENV'];
+const envs = ['NODE_ENV', 'PUBLIC_PATH'];
 
-export default {
+module.exports = {
   name: BUILD_TARGET,
   mode: 'development',
   bail: true,
   entry: entryFile,
   output: {
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[name].js',
+    filename: 'js/[name].[hash].js',
+    chunkFilename: 'js/[name].[hash].js',
     path: outputDir
   },
   plugins: [
     new webpack.DefinePlugin({
       env: Object.keys(process.env).reduce((compiled, key) => {
-        if (key.indexOf('APP_ENV_') !== -1 || envs.includes(key)) {
-          compiled[key] = JSON.stringify(process.env[key]);
+        if (key.indexOf('APP_ENV_') > -1) {
+          compiled[camelCase(key.substr(8))] = JSON.stringify(process.env[key]);
+        } else if (envs.includes(key)) {
+          compiled[camelCase(key)] = JSON.stringify(process.env[key]);
         }
 
         return compiled;
@@ -50,10 +60,25 @@ export default {
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
+        useShortDoctype: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
       }
     }),
-    new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }])
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[name].[hash].css'
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      async: 'main'
+    }),
+    new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }]),
+    new InlineChunksHTMLWebpackPlugin({
+      deleteFile: true,
+      inlineChunks: ['runtime', 'main.css']
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     rules: [
@@ -144,6 +169,14 @@ export default {
   devServer: {
     host: HOST,
     port: PORT,
-    open: true
+    open: true,
+    hot: true,
+    overlay: true,
+    open: process.env.BUILD_TARGET === 'web',
+    writeToDisk: true,
+    compress: true,
+    publicPath: process.env.PUBLIC_PATH,
+    openPage: process.env.PUBLIC_PATH,
+    https: process.env.HTTPS === 'true'
   }
 };

@@ -4,9 +4,8 @@ const path = require('path');
 const fs = require('fs');
 const gzipSize = require('gzip-size');
 const chalk = require('chalk');
-const dotenv = require('dotenv');
 
-dotenv.config();
+require('dotenv').config();
 
 const BUILD_TARGETS = process.env.BUILD_TARGETS.split(',').map(str => str.trim());
 

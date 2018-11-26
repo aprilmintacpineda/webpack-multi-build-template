@@ -17,11 +17,13 @@ It starts out with web, native, and mobile using [inferno-js](https://github.com
 
 ## Environment variables
 
-Environment variables defined in `.env` file would be available as the `env` global object. You should prefix them with `APP_ENV_`, e.g., `APP_ENV_TEST_VAR="some value"`, which would be available via `env.APP_ENV_TEST_VAR`. `PUBLIC_PATH` and `NODE_ENV` are available by default.
+Environment variables defined in `.env` file would be available as the `env` global object. You should prefix them with `APP_ENV_`, e.g., `APP_ENV_TEST_VAR="some value"`, which would be available via `env.testVar`. All env variables will be converted to `camelCase`, additionally, the prefix `APP_ENV_` will not be included in the key name.
+
+`publicPath`, which came from `PUBLIC_PATH`, and `nodeEnv`, which came from `NODE_ENV`, are available by default.
 
 #### NOTE
 
-All values defined in `env` global object are **STRINGS**.
+All values defined in `env` global object are `String`s.
 
 ## WEBSITE_NAME
 
@@ -47,6 +49,16 @@ This is where your app would be accessible during development.
 This is only used in `npm run build` command to build all environments in parallel.
 
 This should be a comma separated string of all the folder names inside the `src` directory where there's an `entry.js` file. E.g.: `BUILD_TARGETS="aDirectory,anotherDirectory,oneMoreDirectory"`. There should be no trailing spaces and slashes.
+
+# Build
+
+## Inlined with index.html
+
+By default, the `main.css` is inline with `index.html`. Babel runtime is also split into a separate chunk that's also inlined.
+
+## Scripts
+
+The vendors script and the main script are split and are loaded via async. This improves loading performance on browsers.
 
 # Code formatting
 

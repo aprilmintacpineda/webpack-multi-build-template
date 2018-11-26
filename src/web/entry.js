@@ -16,7 +16,7 @@ const Topbar = loadAsyncComponent(
   import(/* webpackChunkName: 'Topbar' */ '_shared/navigations/Topbar')
 );
 
-function App() {
+function App () {
   this.componentDidMount = () => {
     console.warn('This will be deleted'); // eslint-disable-line
 
