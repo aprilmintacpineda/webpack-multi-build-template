@@ -3,6 +3,7 @@
   "name": "My App",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#006699",
   "theme_color": "#006699",
   "icons": [

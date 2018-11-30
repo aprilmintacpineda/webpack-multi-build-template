@@ -64,6 +64,10 @@ The vendors script and the main script are split and are loaded via async. This 
 
 The template is PWA enabled by default. Service worker is powered by [workbox](https://github.com/GoogleChrome/workbox).
 
+Dummy icons are available in `public/icons` (16x16, 24x24, 32x32, 64x64, 128x128, 256x256, 512x512).
+
+Manifest file is also available at `public/manifest.json` which the `index.html` already links to.
+
 # Code formatting
 
 For code formatting the template is using [eslint](https://github.com/eslint/eslint) and [prettier](https://github.com/prettier/prettier).
