@@ -1,8 +1,5 @@
 /** @format */
 
-const webpack = require('webpack');
-const path = require('path');
-const postcssPresetEnv = require('postcss-preset-env');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,6 +7,10 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const InlineChunksHTMLWebpackPlugin = require('inline-chunks-html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const postcssPresetEnv = require('postcss-preset-env');
+const workboxWebpackPlugin = require('workbox-webpack-plugin');
 
 require('dotenv').config();
 
@@ -65,12 +66,18 @@ function configure (buildTarget) {
       }),
       new InlineChunksHTMLWebpackPlugin({
         deleteFile: true,
-        inlineChunks: ['runtime', 'main.css']
+        inlineChunks: ['main.css']
       }),
       new ScriptExtHtmlWebpackPlugin({
-        async: 'main'
+        defaultAttribute: 'async'
       }),
-      new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }])
+      new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }]),
+      new workboxWebpackPlugin.GenerateSW({
+        skipWaiting: true,
+        clientsClaim: true,
+        exclude: [/main.[a-zA-Z0-9]+.css/gim],
+        swDest: 'serviceWorker.js'
+      })
     ],
     module: {
       rules: [

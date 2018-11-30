@@ -1,12 +1,13 @@
 /** @format */
 
-const webpack = require('webpack');
-const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const InlineChunksHTMLWebpackPlugin = require('inline-chunks-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const workboxWebpackPlugin = require('workbox-webpack-plugin');
 
 require('dotenv').config();
 
@@ -17,8 +18,8 @@ function camelCase (str) {
 }
 
 const BUILD_TARGET = process.env.BUILD_TARGET.trim();
-const HOST = process.env.host ? process.env.host.trim() : '0.0.0.0';
-const PORT = process.env.port ? process.env.port.trim() : 9000;
+const HOST = process.env.host ? process.env.HOST.trim() : '0.0.0.0';
+const PORT = process.env.port ? process.env.PORT.trim() : 9000;
 
 const outputDir = path.join(__dirname, '../builds/' + BUILD_TARGET);
 const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
@@ -70,13 +71,19 @@ module.exports = {
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[name].[hash].css'
     }),
-    new ScriptExtHtmlWebpackPlugin({
-      async: 'main'
-    }),
-    new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }]),
     new InlineChunksHTMLWebpackPlugin({
       deleteFile: true,
-      inlineChunks: ['runtime', 'main.css']
+      inlineChunks: ['main.css']
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'async'
+    }),
+    new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }]),
+    new workboxWebpackPlugin.GenerateSW({
+      skipWaiting: true,
+      clientsClaim: true,
+      exclude: [/main.[a-zA-Z0-9]+.css/gim],
+      swDest: 'serviceWorker.js'
     }),
     new webpack.HotModuleReplacementPlugin()
   ],

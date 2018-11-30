@@ -4,6 +4,7 @@ import '_shared/styles/index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './test.scss';
 
+import '_shared/registerServiceWorker';
 import { render, Component } from 'inferno';
 import loadAsyncComponent from 'inferno-async-component';
 import { HashRouter, Switch, Route } from 'inferno-router';
