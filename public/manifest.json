@@ -1,0 +1,45 @@
+{
+  "short_name": "MyApp",
+  "name": "My App",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#006699",
+  "theme_color": "#006699",
+  "icons": [
+    {
+      "src": "icons/icon_16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "icons/icon_24x24.png",
+      "type": "image/png",
+      "sizes": "24x24"
+    },
+    {
+      "src": "icons/icon_32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "icons/icon_64x64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "icons/icon_128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "icons/icon_256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icons/icon_512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

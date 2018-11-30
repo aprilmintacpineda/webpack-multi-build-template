@@ -17,8 +17,8 @@ const Topbar = loadAsyncComponent(
   import(/* webpackChunkName: 'Topbar' */ '_shared/navigations/Topbar')
 );
 
-function App () {
-  this.componentDidMount = () => {
+class App extends Component {
+  componentDidMount () {
     console.warn('This will be deleted'); // eslint-disable-line
 
     let a = 'Default value';
@@ -30,7 +30,7 @@ function App () {
     console.log('The value of a is', a); // eslint-disable-line
   };
 
-  this.render = () => {
+  render () {
     console.log(env); // eslint-disable-line
 
     return (
@@ -45,12 +45,6 @@ function App () {
       </>
     );
   };
-
-  return this;
 }
 
-App.prototype = Component.prototype;
-App.prototype.constructor = App;
-
-const targetElement = document.getElementById('app');
-render(<App />, targetElement);
+render(<App />, document.getElementById('app'));

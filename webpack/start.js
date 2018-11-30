@@ -18,8 +18,8 @@ function camelCase (str) {
 }
 
 const BUILD_TARGET = process.env.BUILD_TARGET.trim();
-const HOST = process.env.host ? process.env.HOST.trim() : '0.0.0.0';
-const PORT = process.env.port ? process.env.PORT.trim() : 9000;
+const HOST = process.env.HOST.trim();
+const PORT = process.env.PORT.trim();
 
 const outputDir = path.join(__dirname, '../builds/' + BUILD_TARGET);
 const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
