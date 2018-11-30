@@ -60,6 +60,10 @@ By default, the `main.css` is inline with `index.html`. Babel runtime is also sp
 
 The vendors script and the main script are split and are loaded via async. This improves loading performance on browsers.
 
+# PWA
+
+The template is PWA enabled by default. Service worker is powered by [workbox](https://github.com/GoogleChrome/workbox).
+
 # Code formatting
 
 For code formatting the template is using [eslint](https://github.com/eslint/eslint) and [prettier](https://github.com/prettier/prettier).
