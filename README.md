@@ -19,11 +19,19 @@ It starts out with web, native, and mobile using [inferno-js](https://github.com
 
 Environment variables defined in `.env` file would be available as the `env` global object. You should prefix them with `APP_ENV_`, e.g., `APP_ENV_TEST_VAR="some value"`, which would be available via `env.testVar`. All env variables will be converted to `camelCase`, additionally, the prefix `APP_ENV_` will not be included in the key name.
 
-`publicPath`, which came from `PUBLIC_PATH`, and `nodeEnv`, which came from `NODE_ENV`, are available by default.
+`publicPath`, which came from `PUBLIC_PATH` is available by default.
 
-#### NOTE
+All env variables are being parse to their native data type. Example:
 
-All values defined in `env` global object are `String`s.
+```
+APP_ENV_BOOL="true"
+APP_ENV_TEST_OBJ='{"test1":"value1","test2":"value2","test3":true,"test4":["hello",123,123.56]}'
+APP_ENV_ARR='["hello",123,123.56]'
+```
+
+- `APP_ENV_BOOL` will be available as `env.bool` which would be a `Boolean`.
+- `APP_ENV_OBJ` will be available as `env.testObj` which would be an `Object`.
+- `APP_ENV_ARR` will be available as `env.arr` which would be an `Array`.
 
 ## WEBSITE_NAME
 
