@@ -11,14 +11,9 @@ const webpack = require('webpack');
 const path = require('path');
 const postcssPresetEnv = require('postcss-preset-env');
 const workboxWebpackPlugin = require('workbox-webpack-plugin');
+const helpers = require('./helpers');
 
 require('dotenv').config();
-
-function camelCase (str) {
-  return str.split('_').reduce(function (compiled, word, index) {
-  	return compiled + (index === 0? word.toLowerCase() : word.substr(0, 1).toUpperCase() + word.substr(1).toLowerCase());
-  }, '');
-}
 
 function configure (buildTarget) {
   const outputDir = path.join(__dirname, '../builds/' + buildTarget);
@@ -36,15 +31,7 @@ function configure (buildTarget) {
     },
     plugins: [
       new webpack.DefinePlugin({
-        env: Object.keys(process.env).reduce((compiled, key) => {
-          if (key.indexOf('APP_ENV_') > -1) {
-            compiled[camelCase(key.substr(8))] = JSON.stringify(process.env[key]);
-          } else if (envs.includes(key)) {
-            compiled[camelCase(key)] = JSON.stringify(process.env[key]);
-          }
-
-          return compiled;
-        }, {})
+        env: helpers.mapEnvsToPrimitiveTypes(process.env, includedEnvs)
       }),
       new HTMLWebpackPlugin({
         template: path.join(__dirname, '../public/index.html'),
@@ -229,7 +216,7 @@ function configure (buildTarget) {
 process.env.NODE_ENV = 'production';
 
 const BUILD_TARGETS = process.env.BUILD_TARGETS.split(',').map(str => str.trim());
-const envs = ['NODE_ENV', 'PUBLIC_PATH'];
+const includedEnvs = ['NODE_ENV', 'PUBLIC_PATH'];
 const configs = [];
 
 for (let a = 0; a < BUILD_TARGETS.length; a++) {

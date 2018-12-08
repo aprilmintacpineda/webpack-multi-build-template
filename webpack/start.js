@@ -8,14 +8,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const path = require('path');
 const workboxWebpackPlugin = require('workbox-webpack-plugin');
+const helpers = require('./helpers');
 
 require('dotenv').config();
-
-function camelCase (str) {
-  return str.split('_').reduce(function (compiled, word, index) {
-	return compiled + (index === 0? word.toLowerCase() : word.substr(0, 1).toUpperCase() + word.substr(1).toLowerCase());
-  }, '');
-}
 
 const BUILD_TARGET = process.env.BUILD_TARGET.trim();
 const HOST = process.env.HOST.trim();
@@ -24,9 +19,7 @@ const PORT = process.env.PORT.trim();
 const outputDir = path.join(__dirname, '../builds/' + BUILD_TARGET);
 const entryFile = path.join(__dirname, '../src/' + BUILD_TARGET + '/entry.js');
 
-process.env.NODE_ENV = 'development';
-
-const envs = ['NODE_ENV', 'PUBLIC_PATH'];
+const includedEnvs = ['PUBLIC_PATH'];
 
 module.exports = {
   name: BUILD_TARGET,
@@ -40,15 +33,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      env: Object.keys(process.env).reduce((compiled, key) => {
-        if (key.indexOf('APP_ENV_') > -1) {
-          compiled[camelCase(key.substr(8))] = JSON.stringify(process.env[key]);
-        } else if (envs.includes(key)) {
-          compiled[camelCase(key)] = JSON.stringify(process.env[key]);
-        }
-
-        return compiled;
-      }, {})
+      env: helpers.mapEnvsToPrimitiveTypes(process.env, includedEnvs)
     }),
     new HTMLWebpackPlugin({
       template: path.join(__dirname, '../public/index.html'),

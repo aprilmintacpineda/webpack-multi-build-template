@@ -13,6 +13,8 @@ import { HashRouter, Switch, Route } from 'inferno-router';
 import Home from './routes/Home';
 import About from './routes/About';
 
+console.log(env); // eslint-disable-line
+
 const Topbar = loadAsyncComponent(
   import(/* webpackChunkName: 'Topbar' */ '_shared/navigations/Topbar')
 );
@@ -31,8 +33,6 @@ class App extends Component {
   };
 
   render () {
-    console.log(env); // eslint-disable-line
-
     return (
       <>
         <Topbar />
