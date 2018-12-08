@@ -60,6 +60,7 @@ function configure (buildTarget) {
       }),
       new CopyWebpackPlugin([{ from: path.join(__dirname, '../public'), ignore: ['index.html'] }]),
       new workboxWebpackPlugin.GenerateSW({
+        importWorkboxFrom: 'local',
         skipWaiting: true,
         clientsClaim: true,
         exclude: [/main.[a-zA-Z0-9]+.css/gim],
