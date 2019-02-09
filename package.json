@@ -1,5 +1,5 @@
 {
-  "name": "multiple-builds-with-webpack",
+  "name": "webpack-multi-build-template",
   "version": "1.0.0",
   "description": "This repository serves as a demonstration and also a template for projects that require different builds for different environments using webpack.",
   "main": "index.js",
