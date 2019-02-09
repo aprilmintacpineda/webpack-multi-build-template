@@ -13,14 +13,14 @@ import { HashRouter, Switch, Route } from 'inferno-router';
 import Home from './routes/Home';
 import About from './routes/About';
 
-console.log(env); // eslint-disable-line
-
 const Topbar = loadAsyncComponent(
   import(/* webpackChunkName: 'Topbar' */ '_shared/navigations/Topbar')
 );
 
 class App extends Component {
   componentDidMount () {
+    console.log('process.env.APP_TEST_OBJ_COMPLEX', process.env.APP_TEST_OBJ_COMPLEX);
+
     console.warn('This will be deleted'); // eslint-disable-line
 
     let a = 'Default value';

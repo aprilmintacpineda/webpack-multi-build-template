@@ -17,21 +17,24 @@ It starts out with web, native, and mobile using [inferno-js](https://github.com
 
 ## Environment variables
 
-Environment variables defined in `.env` file would be available as the `env` global object. You should prefix them with `APP_ENV_`, e.g., `APP_ENV_TEST_VAR="some value"`, which would be available via `env.testVar`. All env variables will be converted to `camelCase`, additionally, the prefix `APP_ENV_` will not be included in the key name.
-
-`publicPath`, which came from `PUBLIC_PATH` is available by default.
+Environment variables defined in `.env` file would be available as the `process.env` global object. You should prefix them with `APP_`, e.g., `APP_TEST_VAR="some value"`, which would be available via `process.env.APP_TEST_VAR`.
 
 All env variables are being parse to their native data type. Example:
 
 ```
-APP_ENV_BOOL="true"
-APP_ENV_TEST_OBJ='{"test1":"value1","test2":"value2","test3":true,"test4":["hello",123,123.56]}'
-APP_ENV_ARR='["hello",123,123.56]'
+APP_BOOL="true"
+APP_TEST_OBJ='{"test1":"value1","test2":"value2","test3":true,"test4":["hello",123,123.56]}'
+APP_ARR='["hello",123,123.56]'
 ```
 
-- `APP_ENV_BOOL` will be available as `env.bool` which would be a `Boolean`.
-- `APP_ENV_OBJ` will be available as `env.testObj` which would be an `Object`.
-- `APP_ENV_ARR` will be available as `env.arr` which would be an `Array`.
+- `APP_BOOL` will be available as `process.env.APP_BOOL` which would be a `Boolean`.
+- `APP_OBJ` will be available as `process.env.APP_TEST_OBJ` which would be an `Object`.
+- `APP_ARR` will be available as `process.env.APP_ARR` which would be an `Array`.
+
+All `process.env.APP_VAR` instances are being replaced, i.e.:
+
+**input**: `console.log(process.env.APP_TEST_OBJ)`
+**output**: `console.log({"test1":"value1","test2":"value2","test3":true,"test4":["hello",123,123.56]})`
 
 ## WEBSITE_NAME
 

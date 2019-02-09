@@ -17,7 +17,7 @@
   "scripts": {
     "reinstallNodeModules": "rm -rf node_modules package-lock.json && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf builds && node node_modules/parallel-webpack/bin/run.js --config webpack/build && npm run filesizes",
+    "build": "rm -rf builds && node node_modules/parallel-webpack/bin/run.js --config webpack/build.js && npm run filesizes",
     "start": "node node_modules/.bin/webpack-dev-server --config webpack/start.js",
     "serve:web": "http-server builds/web",
     "serve": "http-server builds",
