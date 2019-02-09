@@ -1,10 +1,34 @@
 <!-- @format -->
 
-# What this is
+# The idea
 
-This repository serves as a demonstration and also a template for projects that require different builds for different environments using webpack.
+Imagine that you have a **hybrid application** that runs on different platforms. You have one for ios, android, and desktop. You also have desktop web and mobile web version. But all these different platforms running on different devices as **hybrid applications** share SOME or maybe A LOT of source codes, how would you handle this sharing and how would you build for them?
 
-It starts out with web, native, and mobile using [inferno-js](https://github.com/infernojs/inferno). But you can certainly modify it to use [react](https://github.com/facebook/react) or anything really. The repository is already setup for development and production.
+This template solves that by separating codes specific for each platform and having a directory for codes *shared* across these platforms.
+
+## Problems I've encountered
+
+1. Relative paths when importing.
+
+```js
+import { aHelperFunc } from 'path/to/some/module';
+```
+
+You can think of the `path/to/some/module` to be something like `../../../helpers` or `../../shared/helpers`. This can get daunting real quick. This template solves this problem by making use of `alias` offered by webpack. Using aliases, paths like `../../../helpers` can quickly turn into `_helpers` and paths like `../../shared/helpers` can quickly turn into `_shared/helpers`.
+
+2. A share code rely on a module that is specific for each platform.
+
+Say you have a helper function called `createHuman` that basically creates a random `Human` object. BUT that `Human` object is specific for each platform. How would the shared helper function `createHuman` know where to pull in that `Human` object? Simple, by referencing what I call `self`.
+
+```js
+import { Human } from '_self/classes/Human';
+```
+
+The `_self/classes/Human` would resolve to `src/{platform}/classes/Human` where `{platform}` is the current platform we are building for. `src/web/classes/Human` for `web` platform, `src/ios/classes/Human` for `ios` platform, `src/android/classes/Human` for `android`, `src/desktop/classes/Human` for `desktop` platform.
+
+3. Deep Sharing
+
+There would be instances where only a little bit of codes, say 5%, would only be different between two, or even more, platforms. To handle this, you'll have to introduce another layer of sharing and make use of the `self`.
 
 # Getting started
 
